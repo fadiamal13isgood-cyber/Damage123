@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version '1.15.5'
 }
 
 version = project.mod_version
@@ -32,5 +32,19 @@ processResources {
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
         expand "version": project.version
+    }
+}
+
+// Flat layout: all project files sit in one folder (easy to upload from a phone).
+sourceSets {
+    main {
+        java {
+            srcDirs = ['.']
+            include 'DoubleDamageMod.java'
+        }
+        resources {
+            srcDirs = ['.']
+            include 'fabric.mod.json'
+        }
     }
 }
